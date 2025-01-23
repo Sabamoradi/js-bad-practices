@@ -45,7 +45,7 @@ To Parse JSON Strings: Use JSON.parse() instead of eval().
 
 To Execute Code Dynamically: Use functions, conditionals, or modules for structured and predictable execution.
 
-- Inefficient DOM Manipulation
+-Inefficient DOM Manipulation
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
 
@@ -77,12 +77,14 @@ When you read a DOM property like offsetWidth, offsetHeight, or getComputedStyle
 const items = document.querySelectorAll(".item");
 
 //bad
+
 items.forEach(item => {
     const width = item.offsetWidth; // Forces a reflow
     item.style.width = `${width + 10}px`; // force reflow
 });
 
 //good
+
 const items = document.querySelectorAll(".item");
 
 const widths = Array.from(items).map(item => item.offsetWidth);
@@ -103,7 +105,7 @@ Avoid animating layout-affecting properties like width, height, or top. Animate 
     
 }
 
-- For-in Loops on Arrays:
+-For-in Loops on Arrays:
 
 The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
 
