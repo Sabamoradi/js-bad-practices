@@ -1,4 +1,4 @@
-# js-best-practices
+# what should not be used in javascript
 
 # Table of Contents
 - [Introduction](docs/introduction.md)
