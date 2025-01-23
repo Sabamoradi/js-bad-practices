@@ -45,6 +45,7 @@ To Parse JSON Strings: Use JSON.parse() instead of eval().
 
 To Execute Code Dynamically: Use functions, conditionals, or modules for structured and predictable execution.
 
+
 - Inefficient DOM Manipulation
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
