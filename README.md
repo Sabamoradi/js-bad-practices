@@ -1,11 +1,13 @@
 # what should not be used in javascript
 
 # Table of Contents
-- [Introduction](docs/introduction.md)
+- [Introduction]
   
-    -[eval](docs/eval.md)
+    -[eval]
   
-    -[webWorker](docs/webWorker.md)
+    -[Inefficient DOM Manipulation]
+  
+    -[webWorker]
 
 -eval
 
