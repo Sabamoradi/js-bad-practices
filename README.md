@@ -45,7 +45,6 @@ To Parse JSON Strings: Use JSON.parse() instead of eval().
 
 To Execute Code Dynamically: Use functions, conditionals, or modules for structured and predictable execution.
 
-
 - Inefficient DOM Manipulation
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
@@ -96,11 +95,29 @@ items.forEach((item, index) => {
 
  Where possible, offload work to the GPU by using CSS for animations and transitions.
 
-Avoid animating layout-affecting properties like width, height, or top.
+Avoid animating layout-affecting properties like width, height, or top. Animate GPU-accelerated properties like transform or opacity instead.
 
 .item {
+
     transition: transform 0.3s ease;
+    
 }
-Animate GPU-accelerated properties like transform or opacity instead.
+
+- For-in Loops on Arrays:
+
+The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
+
+for...in can be slower compared to alternatives like Object.keys() or for...of because it processes enumerable properties from the prototype chain.For every property, the engine checks whether it's part of the object's own properties or inherited.
+
+If an array has custom properties or methods attached, for...in will iterate over these as well.
+
+Better Alternatives for Arrays:
+
+for: Classic loop, fast and reliable.
+
+for...of: Modern and optimized for arrays.
+
+forEach: Functional and readable.
+
 
   
