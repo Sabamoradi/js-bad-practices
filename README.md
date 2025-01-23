@@ -44,4 +44,6 @@ Increased Memory Usage: Repeatedly parsing and compiling code can consume more m
 To Parse JSON Strings: Use JSON.parse() instead of eval().
 
 To Execute Code Dynamically: Use functions, conditionals, or modules for structured and predictable execution.
+
+Inefficient DOM Manipulation
   
