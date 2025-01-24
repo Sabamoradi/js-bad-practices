@@ -3,11 +3,6 @@
 ## Table of Contents
 - [Overview](#overview)
 - [Why Avoid `eval()`?](#why-avoid-eval)
-- [Performance Impact of `eval()`](#performance-impact-of-eval)
-- [Security Risks](#security-risks)
-- [Alternatives to `eval()`](#alternatives-to-eval)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Why Avoid `eval()`?
 The argument of the eval() function is a string. It returns the completion value of the code.
@@ -19,6 +14,7 @@ The key feature of eval() is that it can execute code that isn’t known until r
 ```javascript
 const code = "let y = 20; y * 2";
 console.log(eval(code)); // Output: 40
+```
 
 Code Injection Risks:
 
