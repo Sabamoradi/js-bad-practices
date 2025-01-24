@@ -16,8 +16,8 @@ console.log(eval('2 + 2')); // Expected output: 4
 
 The key feature of eval() is that it can execute code that isn’t known until runtime.
 
+```javascript
 const code = "let y = 20; y * 2";
-
 console.log(eval(code)); // Output: 40
 
 Code Injection Risks:
