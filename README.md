@@ -18,7 +18,15 @@ const code = "let y = 20; y * 2";
 console.log(eval(code)); // Output: 40
 ```
 
-Code Injection Risks:
+Why Avoid eval()?
+
+1. Security Risks:
+Code Injection: Using eval() with untrusted input (e.g., user input) can execute harmful or malicious code.
+```javascript
+const userInput = "alert('Hacked!')";
+eval(userInput); // Executes the alert function, which could be malicious.
+```
+
 
 If the string passed to eval() comes from an external source (e.g., user input), it can execute harmful code.
 
