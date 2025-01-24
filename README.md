@@ -136,7 +136,7 @@ Avoid animating layout-affecting properties like width, height, or top. Animate 
     transition: transform 0.3s ease;
 }
 ```
-## For-in Loops on Arrays
+##For in Loops
 
 The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
 
