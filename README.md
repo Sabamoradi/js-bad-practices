@@ -1,21 +1,15 @@
 # what should not be used in javascript
 
-# Table of Contents
+## Table of Contents
+- [Overview](#overview)
+- [Why Avoid `eval()`?](#why-avoid-eval)
+- [Performance Impact of `eval()`](#performance-impact-of-eval)
+- [Security Risks](#security-risks)
+- [Alternatives to `eval()`](#alternatives-to-eval)
+- [Contributing](#contributing)
+- [License](#license)
 
-    -[eval]
-  
-    -[Inefficient DOM Manipulation]
-
-    -[For-in]
-
-    -[Blocking the Main Thread]
-  
-    -[webWorker]
-
-    -[Garbage collection]
-
--eval
-
+## Why Avoid `eval()`?
 The argument of the eval() function is a string. It returns the completion value of the code.
 
 console.log(eval('2 + 2')); // Expected output: 4
