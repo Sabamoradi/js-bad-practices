@@ -1,8 +1,7 @@
 # what should not be used in javascript
 
 # Table of Contents
-- [Introduction]
-  
+
     -[eval]
   
     -[Inefficient DOM Manipulation]
