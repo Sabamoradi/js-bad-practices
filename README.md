@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [eval() in JavaScript](#`eval()` in JavaScript?)
+- [eval() in JavaScript](#eval-in-JavaScript?)
 
 ## `eval()` in JavaScript?
 The eval() function takes a string as its argument and evaluates it as JavaScript code. It returns the result of the executed code.
