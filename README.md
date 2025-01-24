@@ -4,6 +4,9 @@
 - [Overview](#overview)
 - [eval() in JavaScript](#eval-in-JavaScript?)
 - [Inefficient DOM Manipulation](#Inefficient-DOM-Manipulation)
+- [For-in-Loops](#For-in-Loops)
+-[Garbage collection](#Garbage-collection)
+
 
 
 ## `eval()` in JavaScript?
@@ -135,8 +138,7 @@ Avoid animating layout-affecting properties like width, height, or top. Animate 
     transition: transform 0.3s ease;
 }
 ```
-
--For-in Loops on Arrays:
+## For-in Loops on Arrays
 
 The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
 
@@ -155,60 +157,43 @@ forEach: Functional and readable.
 -Blocking the Main Thread:
 
 The main thread is where a browser processes user events and paints. By default, the browser uses a single thread to run all the JavaScript in your page, as well as to perform layout, reflows, and garbage collection. This means that long-running JavaScript functions can block the thread, leading to an unresponsive page and a bad user experience.
-
+```javascript
 function slowTask() {
-
     const end = Date.now() + 5000; // Calculate the end time (5 seconds from now)
-
     while (Date.now() < end) {
-    
         // Continuously check if the current time has reached the end time
-    
     }
-    
 }
-
 slowTask();
+```
 
 While the slowTask function is running, the event loop is stuck executing the while loop.
 
 No new tasks (e.g., handling user input or rendering) can be processed until the slowTask function completes.
 
 Performing expensive DOM updates or large reflows can block the main thread.
-
+```javascript
 const container = document.getElementById("container");
-
 for (let i = 0; i < 100000; i++) {
-
     const div = document.createElement("div");
-    
     div.textContent = `Item ${i}`;
-    
     container.appendChild(div);
-
 }
+```
 
 Blocking with Large Lists or Tables:
-
+```javascript
 function Sample() {
-    
     const items = Array.from({ length: 10000 }, (_, i) => `Item ${i}`);
-    
     return (
-    
         <div>
-        
-            {items.map((item) => (
-            
+            {items.map((item) => ( 
                 <div key={item}>{item}</div>
-           
-            ))}
-            
+            ))} 
         </div>
-   
     );
-    
 }
+```
 
 React tries to render all 10,000 items at once, which blocks the main thread and causes UI freezes.
 
@@ -256,7 +241,7 @@ Background tasks: Fetching data, processing files, and other tasks that don't re
 
 Machine learning models: Running inference on machine learning models in the background.
 
--Garbage collection:
+##Garbage collection:
 
 Garbage collection (GC) is a process by which a programming language runtime automatically manages memory. It ensures that memory used by objects that are no longer needed is reclaimed so that it can be reused. This helps avoid memory leaks and optimizes the performance of the application.
 
@@ -295,17 +280,15 @@ Release when the memory is not needed anymore: The majority of memory management
 The main concept that garbage collection algorithms rely on is the concept of reference. A reference is essentially a pointer or link from one object to another, which indicates that the former is using or relying on the latter.
 
 Reference-counting garbage collection: This algorithm reduces the problem from determining whether or not an object is still needed to determining if an object still has any other objects referencing it. An object is said to be "garbage", or collectible if there are zero references pointing to it. There is a limitation when it comes to circular references. In the following example, two objects are created with properties that reference one another, thus creating a cycle. They will go out of scope after the function call has completed. At that point they become unneeded and their allocated memory should be reclaimed. However, the reference-counting algorithm will not consider them reclaimable since each of the two objects has at least one reference pointing to them, resulting in neither of them being marked for garbage collection. Circular references are a common cause of memory leaks.
-
+```javascript
 let x = {
   a: {
     b: 2,
   },
 };
-
 let y = x;
-
 let z = y.a;
-
+```
 Mark-and-sweep algorithm: This algorithm assumes the knowledge of a set of objects called roots. In JavaScript, the root is the global object. Periodically, the garbage collector will start from these roots, find all objects that are referenced from these roots, then all objects referenced from these, etc. Starting from the roots, the garbage collector will thus find all reachable objects and collect all non-reachable objects.
 
 This algorithm is an improvement over the previous one since an object having zero references is effectively unreachable. The opposite does not hold true as we have seen with circular references.
