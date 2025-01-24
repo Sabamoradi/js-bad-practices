@@ -12,6 +12,8 @@
   
     -[webWorker]
 
+    -[Garbage collection]
+
 -eval
 
 The argument of the eval() function is a string. It returns the completion value of the code.
@@ -228,6 +230,75 @@ Background tasks: Fetching data, processing files, and other tasks that don't re
 
 Machine learning models: Running inference on machine learning models in the background.
 
+-Garbage collection:
+
+Garbage collection (GC) is a process by which a programming language runtime automatically manages memory. It ensures that memory used by objects that are no longer needed is reclaimed so that it can be reused. This helps avoid memory leaks and optimizes the performance of the application.
+
+In simpler terms, GC frees up memory used by objects that are no longer in use, allowing developers to focus on the application logic without worrying about memory management.
+
+Java (Automatic GC): In Java, the Java Virtual Machine (JVM) automatically handles memory management. The garbage collector in Java tracks objects that are no longer referenced by any other objects and reclaims their memory.
+
+C++ (Manual Memory Management): Unlike Java, C++ does not have automatic garbage collection. In C++, developers must explicitly manage memory using new and delete to allocate and free memory.
+
+Python (Automatic GC with Reference Counting and Cycle Detection): Python uses reference counting as the primary method of garbage collection. When an object’s reference count drops to zero, the memory is automatically freed. Additionally, Python uses a garbage collector to handle circular references.
+
+Garbage Collection in JavaScript:
+
+JavaScript uses automatic garbage collection to manage memory. Unlike C++, developers don’t have to manually allocate or free memory. The JavaScript engine automatically identifies and frees up memory from objects that are no longer referenced.
+
+Memory life cycle
+
+Regardless of the programming language, the memory life cycle is pretty much always the same:
+
+Allocate the memory you need
+
+Use the allocated memory (read, write)
+
+Release the allocated memory when it is not needed anymore
+
+The second part is explicit in all languages. The first and last parts are explicit in low-level languages but are mostly implicit in high-level languages like JavaScript.
+
+Allocation in JavaScript:
+
+Value initialization, function calls , Some methods allocate new values or objects:
+
+Using values: Using values basically means reading and writing in allocated memory. This can be done by reading or writing the value of a variable or an object property or even passing an argument to a function.
+
+Release when the memory is not needed anymore: The majority of memory management issues occur at this phase. JavaScript, utilize a form of automatic memory management known as garbage collection (GC). The purpose of a garbage collector is to monitor memory allocation and determine when a block of allocated memory is no longer needed and reclaim it. This automatic process is an approximation since the general problem of determining whether or not a specific piece of memory is still needed is undecidable.
+
+The main concept that garbage collection algorithms rely on is the concept of reference. A reference is essentially a pointer or link from one object to another, which indicates that the former is using or relying on the latter.
+
+Reference-counting garbage collection: This algorithm reduces the problem from determining whether or not an object is still needed to determining if an object still has any other objects referencing it. An object is said to be "garbage", or collectible if there are zero references pointing to it. There is a limitation when it comes to circular references. In the following example, two objects are created with properties that reference one another, thus creating a cycle. They will go out of scope after the function call has completed. At that point they become unneeded and their allocated memory should be reclaimed. However, the reference-counting algorithm will not consider them reclaimable since each of the two objects has at least one reference pointing to them, resulting in neither of them being marked for garbage collection. Circular references are a common cause of memory leaks.
+
+let x = {
+  a: {
+    b: 2,
+  },
+};
+
+let y = x;
+
+let z = y.a;
+
+Mark-and-sweep algorithm: This algorithm assumes the knowledge of a set of objects called roots. In JavaScript, the root is the global object. Periodically, the garbage collector will start from these roots, find all objects that are referenced from these roots, then all objects referenced from these, etc. Starting from the roots, the garbage collector will thus find all reachable objects and collect all non-reachable objects.
+
+This algorithm is an improvement over the previous one since an object having zero references is effectively unreachable. The opposite does not hold true as we have seen with circular references.
+
+Marking: The garbage collector marks all the objects that are reachable (i.e., those still referenced by other objects).
+
+Sweeping: After marking the reachable objects, the garbage collector sweeps through the heap and frees the memory used by the objects that are no longer referenced.
+
+Compacting (optional): The garbage collector may compact memory by moving objects around in the heap to minimize fragmentation.
+
+Memory Leaks in JavaScript: Memory leaks in JavaScript happen when objects are no longer needed but are still referenced somewhere in the code, preventing the garbage collector from reclaiming their memory. Common causes of memory leaks in JavaScript include:
+
+Global variables: Variables that are unintentionally left in the global scope.
+
+Closures: Functions that reference variables from an outer scope and prevent those variables from being garbage collected.
+
+Event listeners: Not removing event listeners can keep references to DOM elements and prevent them from being garbage collected.
+
+Detached DOM nodes: If a DOM node is removed from the document but still referenced by JavaScript, it cannot be garbage collected.
 
 
 
