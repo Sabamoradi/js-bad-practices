@@ -136,7 +136,7 @@ Avoid animating layout-affecting properties like width, height, or top. Animate 
     transition: transform 0.3s ease;
 }
 ```
-##For in Loops
+## For in Loops
 
 The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
 
@@ -239,7 +239,7 @@ Background tasks: Fetching data, processing files, and other tasks that don't re
 
 Machine learning models: Running inference on machine learning models in the background.
 
-##Garbage collection:
+## Garbage collection:
 
 Garbage collection (GC) is a process by which a programming language runtime automatically manages memory. It ensures that memory used by objects that are no longer needed is reclaimed so that it can be reused. This helps avoid memory leaks and optimizes the performance of the application.
 
