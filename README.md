@@ -3,6 +3,8 @@
 ## Table of Contents
 - [Overview](#overview)
 - [eval() in JavaScript](#eval-in-JavaScript?)
+- [Inefficient DOM Manipulation](#Inefficient-DOM-Manipulation)
+
 
 ## `eval()` in JavaScript?
 The eval() function takes a string as its argument and evaluates it as JavaScript code. It returns the result of the executed code.
@@ -29,16 +31,52 @@ eval(userInput); // Executes the alert function, which could be malicious.
 2. Performance Impact:
    
 Optimization Challenges:
+
 Modern JavaScript engines use techniques like Just-In-Time (JIT) Compilation to optimize code.
+
 Code within eval() is dynamic and unpredictable, preventing the JIT compiler from optimizing it effectively.
+
 Fallback to Interpretation:
+
 Due to eval(), the engine may deoptimize the surrounding code, leading to slower execution.
+
 Increased Memory Usage:
+
 Repeated parsing and compiling of strings in eval() can consume more memory.
 
-If the string passed to eval() comes from an external source (e.g., user input), it can execute harmful code.
+Best Practices to Replace eval()
 
--Inefficient DOM Manipulation
+1. Parsing JSON Strings:
+
+Use JSON.parse() instead of eval() to safely parse JSON.
+```javascript
+const jsonString = '{"name": "John", "age": 30}';
+const data = JSON.parse(jsonString); // Safe and efficient
+```
+2. Executing Dynamic Code:
+
+Use structured and predictable alternatives like functions, conditionals, or modules.
+```javascript
+const dynamicFunction = new Function("a", "b", "return a + b;");
+console.log(dynamicFunction(2, 3)); // Output: 5
+```
+
+Consequences of Using eval()
+
+1.Security Vulnerabilities:
+
+Opens doors to cross-site scripting (XSS) and other security threats.
+
+2.Performance Degradation:
+
+Slower execution due to deoptimization and interpretation.
+Higher memory consumption due to repeated parsing.
+
+3.Unmaintainable Code:
+
+Dynamic code injection makes debugging and maintaining the codebase challenging.
+
+## Inefficient DOM Manipulation
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
 
@@ -69,6 +107,7 @@ When you read a DOM property like offsetWidth, offsetHeight, or getComputedStyle
 
 const items = document.querySelectorAll(".item");
 
+```javascript
 //bad
 
 items.forEach(item => {
@@ -85,18 +124,17 @@ const widths = Array.from(items).map(item => item.offsetWidth);
 items.forEach((item, index) => {
     item.style.width = `${widths[index] + 10}px`;
 });
-
+```
  Use CSS for Animations and Layout Changes:
 
  Where possible, offload work to the GPU by using CSS for animations and transitions.
 
 Avoid animating layout-affecting properties like width, height, or top. Animate GPU-accelerated properties like transform or opacity instead.
-
+```javascript
 .item {
-
     transition: transform 0.3s ease;
-    
 }
+```
 
 -For-in Loops on Arrays:
 
