@@ -26,29 +26,17 @@ Code Injection: Using eval() with untrusted input (e.g., user input) can execute
 const userInput = "alert('Hacked!')";
 eval(userInput); // Executes the alert function, which could be malicious.
 ```
-
+2. Performance Impact:
+   
+Optimization Challenges:
+Modern JavaScript engines use techniques like Just-In-Time (JIT) Compilation to optimize code.
+Code within eval() is dynamic and unpredictable, preventing the JIT compiler from optimizing it effectively.
+Fallback to Interpretation:
+Due to eval(), the engine may deoptimize the surrounding code, leading to slower execution.
+Increased Memory Usage:
+Repeated parsing and compiling of strings in eval() can consume more memory.
 
 If the string passed to eval() comes from an external source (e.g., user input), it can execute harmful code.
-
-Performance Impact:
-
-JavaScript engines cannot optimize code inside eval() because it is dynamic and unpredictable.
-
-Just-In-Time (JIT) Compilation: Modern JavaScript engines use techniques like JIT compilation to optimize code for speed. JIT compilers analyze the code, identify patterns, and generate highly optimized machine code.
-
-eval() Breaks Predictability:
-
-Since eval() can inject new code dynamically, the JIT compiler cannot safely assume that the compiled code will stay valid. The engine may fall back to slower interpreted execution or deoptimize the surrounding code.
-
-Consequences of Poor Optimization:
-
-Reduced Performance: The inability to optimize eval() code can lead to slower execution, especially when eval() is used frequently or with complex code.
-
-Increased Memory Usage: Repeatedly parsing and compiling code can consume more memory.
-
-To Parse JSON Strings: Use JSON.parse() instead of eval().
-
-To Execute Code Dynamically: Use functions, conditionals, or modules for structured and predictable execution.
 
 -Inefficient DOM Manipulation
 
