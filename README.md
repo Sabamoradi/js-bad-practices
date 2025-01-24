@@ -2,14 +2,16 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Why Avoid `eval()`?](#why-avoid-eval)
+- [eval() in JavaScript](# `eval()` in JavaScript?)
 
-## Why Avoid `eval()`?
-The argument of the eval() function is a string. It returns the completion value of the code.
+## `eval()` in JavaScript?
+The eval() function takes a string as its argument and evaluates it as JavaScript code. It returns the result of the executed code.
 
-console.log(eval('2 + 2')); // Expected output: 4
-
-The key feature of eval() is that it can execute code that isn’t known until runtime.
+```javascript
+const code = "let y = 20; y * 2";
+console.log(eval(code)); // Output: 40
+```
+Executing Dynamic Code: The key feature of eval() is its ability to execute code that isn’t known until runtime.
 
 ```javascript
 const code = "let y = 20; y * 2";
