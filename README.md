@@ -12,7 +12,7 @@ The eval() function takes a string as its argument and evaluates it as JavaScrip
 
 ```javascript
 let x = 10;
-eval("x = 20; console.log(x);"); 
+eval("x = 20; console.log(x);");  // Output: 20
 ```
 Executing Dynamic Code: The key feature of eval() is its ability to execute code that isn’t known until runtime(All the dynamic behavior happens here: variables are assigned, functions are called, and code is evaluated.)
 
@@ -131,10 +131,9 @@ forEach: Functional and readable.
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
 
-Reflow: Recalculate the size and position of all elements on the page. This happens when changes affect the layout ( resizing elements, adding/removing nodes, or modifying width, height, margin , ...).
+Reflow: Recalculate the size and position of all elements on the page. This happens when changes affect the layout (resizing elements, adding/removing nodes, or modifying width, height, margin , ...).
 
 Repaint: Update the visual appearance of the affected elements on the screen. This occurs when changes don't affect the layout but only the appearance (e.g., changing colors, background images)
-
 
 Frameworks like React, Vue, and Angular generally handle DOM updates efficiently, often employing techniques like:
 
@@ -148,7 +147,7 @@ Using document.getElementById() or querySelector() within component methods to d
 
 Using innerHTML to modify large portions of the DOM.
 
-Use CSS Classes:CSS files can be cached by the browser. When using inline styles, the browser cannot cache the styles efficiently, as they are embedded within the HTML. This means that the browser needs to re-parse and apply the styles every time the page is loaded.
+Use CSS Classes: CSS files can be cached by the browser. When using inline styles, the browser cannot cache the styles efficiently, as they are embedded within the HTML. This means that the browser needs to re-parse and apply the styles every time the page is loaded.
 
  Avoid Layout Thrashing:
 
@@ -162,8 +161,8 @@ const items = document.querySelectorAll(".item");
 //bad
 
 items.forEach(item => {
-    const width = item.offsetWidth; // Forces a reflow
-    item.style.width = `${width + 10}px`; // force reflow
+    const width = item.offsetWidth; // causing the browser to compute the layout
+    item.style.width = `${width + 10}px`; //invalidates the layout.
 });
 
 //good
@@ -213,7 +212,7 @@ for (let i = 0; i < 100000; i++) {
 }
 ```
 
-Blocking with Large Lists or Tables:
+Blocking with Large Lists or Tables in React:
 ```javascript
 function Sample() {
     const items = Array.from({ length: 10000 }, (_, i) => `Item ${i}`);
