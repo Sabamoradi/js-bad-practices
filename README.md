@@ -14,7 +14,7 @@ The eval() function takes a string as its argument and evaluates it as JavaScrip
 const code = "let y = 20; y * 2";
 console.log(eval(code)); // Output: 40
 ```
-Executing Dynamic Code: The key feature of eval() is its ability to execute code that isn’t known until runtime.
+Executing Dynamic Code: The key feature of eval() is its ability to execute code that isn’t known until runtime(All the dynamic behavior happens here: variables are assigned, functions are called, and code is evaluated.)
 
 ```javascript
 const code = "let y = 20; y * 2";
@@ -23,23 +23,74 @@ console.log(eval(code)); // Output: 40
 
 Why Avoid eval()?
 
-1. Security Risks:
-Code Injection: Using eval() with untrusted input (e.g., user input) can execute harmful or malicious code.
+Security Risks
+
+Code Injection: Using eval() with untrusted input (e.g., user input) can execute harmful or malicious code. Opens doors to cross-site scripting (XSS) and other security threats.
+
 ```javascript
 const userInput = "alert('Hacked!')";
 eval(userInput); // Executes the alert function, which could be malicious.
-```
-2. Performance Impact:
-   
+```   
 Optimization Challenges:
 
-Modern JavaScript engines use techniques like Just-In-Time (JIT) Compilation to optimize code.
+Modern engines use Just-In-Time (JIT) Compilation to translate JavaScript into highly optimized machine code at runtime. Key steps include:
 
-Code within eval() is dynamic and unpredictable, preventing the JIT compiler from optimizing it effectively.
+1.Parsing and Abstract Syntax Tree (AST): 
 
-Fallback to Interpretation:
+The JavaScript engine quickly converts the code into machine code that is simple and functional but not optimized. 
 
-Due to eval(), the engine may deoptimize the surrounding code, leading to slower execution.
+It doesn’t analyze the code deeply or attempt complex optimizations. 
+
+This ensures the program starts executing as fast as possible.
+
+
+2.Baseline Compilation: The code is compiled into machine code quickly, without extensive optimizations, to start execution fast.
+
+The engine profiles the code during runtime to collect data on how it's being used.
+
+ Optimizing based on observed types (e.g., assuming numbers if all previous calls used numbers).
+
+3.Profiling Hot Code: The engine identifies frequently executed (hot) parts of the code during runtime, such as loops or functions.
+
+4.Optimized Compilation: The engine applies optimizations like inlining, constant folding, or eliminating unnecessary operations to hot code paths.
+
+5.De-optimization: If assumptions made during optimization are invalidated (e.g., a variable changes type), the engine reverts to the baseline code.
+
+The engine reverts the code to its baseline version because the optimized version is no longer valid.
+
+This can happen when:
+
+Types change unexpectedly.
+
+The function behavior changes (e.g., new properties are added to an object).
+
+Edge cases arise that were not part of the profiling data.
+
+When using eval(), the code being executed is provided dynamically as a string, which introduces unpredictability:
+
+1.Unknown Code at Parse Time:
+
+During the initial parsing phase, the engine cannot analyze or optimize the string passed to eval() because it doesn't know what the string contains until runtime.
+
+2.Dynamic Scope Modification:
+
+eval() has access to the current scope and can modify variables or functions unpredictably.
+
+```javascript:
+let x = 10;
+eval("x = 20; console.log(x);"); // Now x is changed dynamically
+```
+This makes it hard for the engine to make assumptions about the state of variables, hindering optimization.
+
+3.Code Profiling Becomes Useless:
+
+The engine relies on analyzing the structure and behavior of static code to apply optimizations.
+
+With eval(), the code can change or introduce entirely new logic, making profiling impossible or unreliable.
+
+4.Security Risks Demand Extra Checks:
+
+The engine may add safeguards (like sandboxing or input validation) when handling eval() to mitigate potential security vulnerabilities, adding overhead.
 
 Increased Memory Usage:
 
@@ -61,22 +112,6 @@ Use structured and predictable alternatives like functions, conditionals, or mod
 const dynamicFunction = new Function("a", "b", "return a + b;");
 console.log(dynamicFunction(2, 3)); // Output: 5
 ```
-
-Consequences of Using eval()
-
-1.Security Vulnerabilities:
-
-Opens doors to cross-site scripting (XSS) and other security threats.
-
-2.Performance Degradation:
-
-Slower execution due to deoptimization and interpretation.
-Higher memory consumption due to repeated parsing.
-
-3.Unmaintainable Code:
-
-Dynamic code injection makes debugging and maintaining the codebase challenging.
-
 ## For in Loops
 
 The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
