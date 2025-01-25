@@ -11,8 +11,8 @@
 The eval() function takes a string as its argument and evaluates it as JavaScript code. It returns the result of the executed code.
 
 ```javascript
-const code = "let y = 20; y * 2";
-console.log(eval(code)); // Output: 40
+let x = 10;
+eval("x = 20; console.log(x);"); 
 ```
 Executing Dynamic Code: The key feature of eval() is its ability to execute code that isn’t known until runtime(All the dynamic behavior happens here: variables are assigned, functions are called, and code is evaluated.)
 
@@ -37,12 +37,7 @@ Modern engines use Just-In-Time (JIT) Compilation to translate JavaScript into h
 
 1.Parsing and Abstract Syntax Tree (AST): 
 
-The JavaScript engine quickly converts the code into machine code that is simple and functional but not optimized. 
-
-It doesn’t analyze the code deeply or attempt complex optimizations. 
-
-This ensures the program starts executing as fast as possible.
-
+The engine parses the code and creates an AST, a structured representation of the code.
 
 2.Baseline Compilation: The code is compiled into machine code quickly, without extensive optimizations, to start execution fast.
 
