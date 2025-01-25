@@ -43,11 +43,15 @@ The engine parses the code and creates an AST, a structured representation of th
 
 The engine profiles the code during runtime to collect data on how it's being used.
 
- Optimizing based on observed types (e.g., assuming numbers if all previous calls used numbers).
+It doesn’t analyze the code deeply or attempt complex optimizations.
+
+Focus on quick translation rather than performance.
 
 3.Profiling Hot Code: The engine identifies frequently executed (hot) parts of the code during runtime, such as loops or functions.
 
-4.Optimized Compilation: The engine applies optimizations like inlining, constant folding, or eliminating unnecessary operations to hot code paths.
+4.Optimized Compilation: The engine applies optimizations like inlining, constant folding, or eliminating unnecessary operations to hot code paths.(Relies on runtime profiling to understand how the code behaves.)
+
+Type Specialization: Optimizing based on observed types (e.g., assuming numbers if all previous calls used numbers).
 
 5.De-optimization: If assumptions made during optimization are invalidated (e.g., a variable changes type), the engine reverts to the baseline code.
 
