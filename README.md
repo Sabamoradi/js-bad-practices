@@ -1,10 +1,9 @@
 # what should not be used in javascript
 
 ## Table of Contents
-- [Overview](#overview)
 - [eval() in JavaScript](#eval-in-JavaScript?)
-- [Inefficient DOM Manipulation](#Inefficient-DOM-Manipulation)
 - [For-in-Loops](#For-in-Loops)
+- [Inefficient DOM Manipulation](#Inefficient-DOM-Manipulation)
 - [Blocking the Main Thread](#Blocking-the-Main-Thread)
 - [Garbage collection](#Garbage-collection)
 
@@ -78,6 +77,22 @@ Higher memory consumption due to repeated parsing.
 
 Dynamic code injection makes debugging and maintaining the codebase challenging.
 
+## For in Loops
+
+The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
+
+for...in can be slower compared to alternatives like Object.keys() or for...of because it processes enumerable properties from the prototype chain.For every property, the engine checks whether it's part of the object's own properties or inherited.
+
+If an array has custom properties or methods attached, for...in will iterate over these as well.
+
+Better Alternatives for Arrays:
+
+for: Classic loop, fast and reliable.
+
+for...of: Modern and optimized for arrays.
+
+forEach: Functional and readable.
+
 ## Inefficient DOM Manipulation
 
 Repaints and Reflows: The DOM is a tree-like structure representing the HTML of your webpage. Whenever you modify the DOM (add, remove, or change elements), the browser needs to:
@@ -137,21 +152,6 @@ Avoid animating layout-affecting properties like width, height, or top. Animate 
     transition: transform 0.3s ease;
 }
 ```
-## For in Loops
-
-The for...in loop iterates over all enumerable string properties of an object, including those inherited from its prototype chain.
-
-for...in can be slower compared to alternatives like Object.keys() or for...of because it processes enumerable properties from the prototype chain.For every property, the engine checks whether it's part of the object's own properties or inherited.
-
-If an array has custom properties or methods attached, for...in will iterate over these as well.
-
-Better Alternatives for Arrays:
-
-for: Classic loop, fast and reliable.
-
-for...of: Modern and optimized for arrays.
-
-forEach: Functional and readable.
 
 ## Blocking the Main Thread
 
