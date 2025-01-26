@@ -23,8 +23,6 @@ console.log(eval(code)); // Output: 40
 
 Why Avoid eval()?
 
-Security Risks
-
 Code Injection: Using eval() with untrusted input (e.g., user input) can execute harmful or malicious code. Opens doors to cross-site scripting (XSS) and other security threats.
 
 ```javascript
