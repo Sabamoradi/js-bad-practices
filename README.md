@@ -33,11 +33,11 @@ Optimization Challenges:
 
 Modern engines use Just-In-Time (JIT) Compilation to translate JavaScript into highly optimized machine code at runtime. Key steps include:
 
-1.Parsing and Abstract Syntax Tree (AST): 
+1. Parsing and Abstract Syntax Tree (AST): 
 
 The engine parses the code and creates an AST, a structured representation of the code.
 
-2.Baseline Compilation: The code is compiled into machine code quickly, without extensive optimizations, to start execution fast.
+2. Baseline Compilation: The code is compiled into machine code quickly, without extensive optimizations, to start execution fast.
 
 The engine profiles the code during runtime to collect data on how it's being used.
 
@@ -45,13 +45,13 @@ It doesn’t analyze the code deeply or attempt complex optimizations.
 
 Focus on quick translation rather than performance.
 
-3.Profiling Hot Code: The engine identifies frequently executed (hot) parts of the code during runtime, such as loops or functions.
+3. Profiling Hot Code: The engine identifies frequently executed (hot) parts of the code during runtime, such as loops or functions.
 
-4.Optimized Compilation: The engine applies optimizations like inlining, constant folding, or eliminating unnecessary operations to hot code paths.(Relies on runtime profiling to understand how the code behaves.)
+4. Optimized Compilation: The engine applies optimizations like inlining, constant folding, or eliminating unnecessary operations to hot code paths.(Relies on runtime profiling to understand how the code behaves.)
 
 Type Specialization: Optimizing based on observed types (e.g., assuming numbers if all previous calls used numbers).
 
-5.De-optimization: If assumptions made during optimization are invalidated (e.g., a variable changes type), the engine reverts to the baseline code.
+5. De-optimization: If assumptions made during optimization are invalidated (e.g., a variable changes type), the engine reverts to the baseline code.
 
 The engine reverts the code to its baseline version because the optimized version is no longer valid.
 
@@ -65,11 +65,11 @@ Edge cases arise that were not part of the profiling data.
 
 When using eval(), the code being executed is provided dynamically as a string, which introduces unpredictability:
 
-1.Unknown Code at Parse Time:
+1. Unknown Code at Parse Time:
 
 During the initial parsing phase, the engine cannot analyze or optimize the string passed to eval() because it doesn't know what the string contains until runtime.
 
-2.Dynamic Scope Modification:
+2. Dynamic Scope Modification:
 
 eval() has access to the current scope and can modify variables or functions unpredictably.
 
@@ -79,13 +79,13 @@ eval("x = 20; console.log(x);"); // Now x is changed dynamically
 ```
 This makes it hard for the engine to make assumptions about the state of variables, hindering optimization.
 
-3.Code Profiling Becomes Useless:
+3. Code Profiling Becomes Useless:
 
 The engine relies on analyzing the structure and behavior of static code to apply optimizations.
 
 With eval(), the code can change or introduce entirely new logic, making profiling impossible or unreliable.
 
-4.Security Risks Demand Extra Checks:
+4. Security Risks Demand Extra Checks:
 
 The engine may add safeguards (like sandboxing or input validation) when handling eval() to mitigate potential security vulnerabilities, adding overhead.
 
